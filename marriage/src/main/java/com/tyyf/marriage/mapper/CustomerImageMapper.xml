@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tyyf.marriage.mapper.CustomerImageMapper" >
+  <resultMap id="BaseResultMap" type="com.tyyf.marriage.entity.CustomerImage" >
+    <id column="uuid_customer" property="uuidCustomer" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="show_switch" property="showSwitch" jdbcType="INTEGER" />
+    <result column="create_persion" property="createPersion" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_type" property="deleteType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid_customer, image_url, show_switch, create_persion, create_time, delete_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_image
+    where uuid_customer = #{uuidCustomer,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer_image
+    where uuid_customer = #{uuidCustomer,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tyyf.marriage.entity.CustomerImage" >
+    insert into customer_image (uuid_customer, image_url, show_switch, 
+      create_persion, create_time, delete_type
+      )
+    values (#{uuidCustomer,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{showSwitch,jdbcType=INTEGER}, 
+      #{createPersion,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{deleteType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyf.marriage.entity.CustomerImage" >
+    insert into customer_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuidCustomer != null" >
+        uuid_customer,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="showSwitch != null" >
+        show_switch,
+      </if>
+      <if test="createPersion != null" >
+        create_persion,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="deleteType != null" >
+        delete_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuidCustomer != null" >
+        #{uuidCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="showSwitch != null" >
+        #{showSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="createPersion != null" >
+        #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteType != null" >
+        #{deleteType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyf.marriage.entity.CustomerImage" >
+    update customer_image
+    <set >
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="showSwitch != null" >
+        show_switch = #{showSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="createPersion != null" >
+        create_persion = #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteType != null" >
+        delete_type = #{deleteType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid_customer = #{uuidCustomer,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyf.marriage.entity.CustomerImage" >
+    update customer_image
+    set image_url = #{imageUrl,jdbcType=VARCHAR},
+      show_switch = #{showSwitch,jdbcType=INTEGER},
+      create_persion = #{createPersion,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      delete_type = #{deleteType,jdbcType=VARCHAR}
+    where uuid_customer = #{uuidCustomer,jdbcType=VARCHAR}
+  </update>
+</mapper>

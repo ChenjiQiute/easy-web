@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tyyf.marriage.mapper.SalesmanAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.tyyf.marriage.entity.SalesmanAccount" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sales_level" property="salesLevel" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="uuid_customer" property="uuidCustomer" jdbcType="VARCHAR" />
+    <result column="delete_type" property="deleteType" jdbcType="INTEGER" />
+    <result column="create_persion" property="createPersion" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_persion" property="updatePersion" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, mobile, email, password, sales_level, account_type, uuid_customer, delete_type, 
+    create_persion, create_time, update_persion, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from salesman_account
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from salesman_account
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tyyf.marriage.entity.SalesmanAccount" >
+    insert into salesman_account (uuid, mobile, email, 
+      password, sales_level, account_type, 
+      uuid_customer, delete_type, create_persion, 
+      create_time, update_persion, update_time
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{salesLevel,jdbcType=VARCHAR}, #{accountType,jdbcType=VARCHAR}, 
+      #{uuidCustomer,jdbcType=VARCHAR}, #{deleteType,jdbcType=INTEGER}, #{createPersion,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyf.marriage.entity.SalesmanAccount" >
+    insert into salesman_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salesLevel != null" >
+        sales_level,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="uuidCustomer != null" >
+        uuid_customer,
+      </if>
+      <if test="deleteType != null" >
+        delete_type,
+      </if>
+      <if test="createPersion != null" >
+        create_persion,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updatePersion != null" >
+        update_persion,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salesLevel != null" >
+        #{salesLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="uuidCustomer != null" >
+        #{uuidCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteType != null" >
+        #{deleteType,jdbcType=INTEGER},
+      </if>
+      <if test="createPersion != null" >
+        #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePersion != null" >
+        #{updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyf.marriage.entity.SalesmanAccount" >
+    update salesman_account
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salesLevel != null" >
+        sales_level = #{salesLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="uuidCustomer != null" >
+        uuid_customer = #{uuidCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteType != null" >
+        delete_type = #{deleteType,jdbcType=INTEGER},
+      </if>
+      <if test="createPersion != null" >
+        create_persion = #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePersion != null" >
+        update_persion = #{updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyf.marriage.entity.SalesmanAccount" >
+    update salesman_account
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sales_level = #{salesLevel,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=VARCHAR},
+      uuid_customer = #{uuidCustomer,jdbcType=VARCHAR},
+      delete_type = #{deleteType,jdbcType=INTEGER},
+      create_persion = #{createPersion,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_persion = #{updatePersion,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>
