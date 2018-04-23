@@ -6,7 +6,6 @@
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="headportrait" property="headportrait" jdbcType="VARCHAR" />
     <result column="wechat_account" property="wechatAccount" jdbcType="VARCHAR" />
     <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
     <result column="account_type" property="accountType" jdbcType="INTEGER" />
@@ -19,9 +18,8 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uuid, mobile, email, password, headportrait, wechat_account, alipay_account, account_type, 
-    login_time, recommend_persion, delete_type, create_persion, create_time, update_persion, 
-    update_time
+    uuid, mobile, email, password, wechat_account, alipay_account, account_type, login_time, 
+    recommend_persion, delete_type, create_persion, create_time, update_persion, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -35,17 +33,15 @@
   </delete>
   <insert id="insert" parameterType="com.tyyf.marriage.entity.CustomerAccount" >
     insert into customer_account (uuid, mobile, email, 
-      password, headportrait, wechat_account, 
-      alipay_account, account_type, login_time, 
-      recommend_persion, delete_type, create_persion, 
-      create_time, update_persion, update_time
-      )
+      password, wechat_account, alipay_account, 
+      account_type, login_time, recommend_persion, 
+      delete_type, create_persion, create_time, 
+      update_persion, update_time)
     values (#{uuid,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{headportrait,jdbcType=VARCHAR}, #{wechatAccount,jdbcType=VARCHAR}, 
-      #{alipayAccount,jdbcType=VARCHAR}, #{accountType,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, 
-      #{recommendPersion,jdbcType=VARCHAR}, #{deleteType,jdbcType=INTEGER}, #{createPersion,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{password,jdbcType=VARCHAR}, #{wechatAccount,jdbcType=VARCHAR}, #{alipayAccount,jdbcType=VARCHAR}, 
+      #{accountType,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, #{recommendPersion,jdbcType=VARCHAR}, 
+      #{deleteType,jdbcType=INTEGER}, #{createPersion,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updatePersion,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.tyyf.marriage.entity.CustomerAccount" >
     insert into customer_account
@@ -61,9 +57,6 @@
       </if>
       <if test="password != null" >
         password,
-      </if>
-      <if test="headportrait != null" >
-        headportrait,
       </if>
       <if test="wechatAccount != null" >
         wechat_account,
@@ -109,9 +102,6 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="headportrait != null" >
-        #{headportrait,jdbcType=VARCHAR},
-      </if>
       <if test="wechatAccount != null" >
         #{wechatAccount,jdbcType=VARCHAR},
       </if>
@@ -156,9 +146,6 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="headportrait != null" >
-        headportrait = #{headportrait,jdbcType=VARCHAR},
-      </if>
       <if test="wechatAccount != null" >
         wechat_account = #{wechatAccount,jdbcType=VARCHAR},
       </if>
@@ -197,7 +184,6 @@
     set mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      headportrait = #{headportrait,jdbcType=VARCHAR},
       wechat_account = #{wechatAccount,jdbcType=VARCHAR},
       alipay_account = #{alipayAccount,jdbcType=VARCHAR},
       account_type = #{accountType,jdbcType=INTEGER},

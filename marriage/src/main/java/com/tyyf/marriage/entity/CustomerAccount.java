@@ -11,8 +11,6 @@ public class CustomerAccount {
 
     private String password;
 
-    private String headportrait;
-
     private String wechatAccount;
 
     private String alipayAccount;
@@ -63,14 +61,6 @@ public class CustomerAccount {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public String getHeadportrait() {
-        return headportrait;
-    }
-
-    public void setHeadportrait(String headportrait) {
-        this.headportrait = headportrait == null ? null : headportrait.trim();
     }
 
     public String getWechatAccount() {
