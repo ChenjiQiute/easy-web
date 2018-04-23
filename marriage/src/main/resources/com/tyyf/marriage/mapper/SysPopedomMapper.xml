@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tyyf.marriage.mapper.SysPopedomMapper" >
+  <resultMap id="BaseResultMap" type="com.tyyf.marriage.entity.SysPopedom" >
+    <id column="popedom_id" property="popedomId" jdbcType="VARCHAR" />
+    <result column="popedom_name" property="popedomName" jdbcType="VARCHAR" />
+    <result column="father_id" property="fatherId" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    popedom_id, popedom_name, father_id, url, grade
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_popedom
+    where popedom_id = #{popedomId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_popedom
+    where popedom_id = #{popedomId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tyyf.marriage.entity.SysPopedom" >
+    insert into sys_popedom (popedom_id, popedom_name, father_id, 
+      url, grade)
+    values (#{popedomId,jdbcType=VARCHAR}, #{popedomName,jdbcType=VARCHAR}, #{fatherId,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyyf.marriage.entity.SysPopedom" >
+    insert into sys_popedom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="popedomId != null" >
+        popedom_id,
+      </if>
+      <if test="popedomName != null" >
+        popedom_name,
+      </if>
+      <if test="fatherId != null" >
+        father_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="popedomId != null" >
+        #{popedomId,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomName != null" >
+        #{popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherId != null" >
+        #{fatherId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyyf.marriage.entity.SysPopedom" >
+    update sys_popedom
+    <set >
+      <if test="popedomName != null" >
+        popedom_name = #{popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherId != null" >
+        father_id = #{fatherId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+    </set>
+    where popedom_id = #{popedomId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyyf.marriage.entity.SysPopedom" >
+    update sys_popedom
+    set popedom_name = #{popedomName,jdbcType=VARCHAR},
+      father_id = #{fatherId,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=INTEGER}
+    where popedom_id = #{popedomId,jdbcType=VARCHAR}
+  </update>
+</mapper>
