@@ -1,5 +1,7 @@
 package com.tyyf.marriage.mapper;
 
+import java.util.List;
+
 import com.tyyf.marriage.entity.CustomerAccount;
 
 public interface CustomerAccountMapper {
@@ -14,4 +16,6 @@ public interface CustomerAccountMapper {
     int updateByPrimaryKeySelective(CustomerAccount record);
 
     int updateByPrimaryKey(CustomerAccount record);
+    
+    List<CustomerAccount> getUserList();
 }

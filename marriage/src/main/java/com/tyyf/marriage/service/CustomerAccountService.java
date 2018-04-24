@@ -3,6 +3,8 @@
  */
 package com.tyyf.marriage.service;
 
+import java.util.List;
+
 import com.tyyf.marriage.entity.CustomerAccount;
 
 /**
@@ -20,5 +22,13 @@ public interface CustomerAccountService {
 	* @date 时间: 2018年4月23日 下午4:48:26  
 	*/
 	int insertUser(CustomerAccount record);
+
+	/** 
+	* @Description 方法描述: 获取用户列表(测试分页)
+	* @return  返回值类型:   List<CustomerAccount>
+	* @author 作者: Chenji Qiute 
+	* @date 时间: 2018年4月24日 下午4:17:40  
+	*/
+	List<CustomerAccount> getUserList(int pageNum, int pageSize);
 
 }
