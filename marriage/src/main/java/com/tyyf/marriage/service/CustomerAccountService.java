@@ -3,9 +3,11 @@
  */
 package com.tyyf.marriage.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import com.tyyf.marriage.entity.CustomerAccount;
+import com.tyyf.marriage.vo.FindUserByIdVO;
+import com.tyyf.marriage.vo.InsertUserVO;
+import com.tyyf.marriage.vo.UpdateUserVO;
 
 /**
  * @Description TODO
@@ -21,7 +23,7 @@ public interface CustomerAccountService {
 	* @author 作者: Chenji Qiute 
 	* @date 时间: 2018年4月23日 下午4:48:26  
 	*/
-	int insertUser(CustomerAccount record);
+	int insertUser(InsertUserVO vo);
 
 	/** 
 	* @Description 方法描述: 获取用户列表(测试分页)
@@ -29,6 +31,30 @@ public interface CustomerAccountService {
 	* @author 作者: Chenji Qiute 
 	* @date 时间: 2018年4月24日 下午4:17:40  
 	*/
-	List<CustomerAccount> getUserList(int pageNum, int pageSize);
+	PageInfo<CustomerAccount> findUserByPage(int pageNum, int pageSize);
+
+	/** 
+	* @Description 方法描述: 修改用户信息
+	* @return  返回值类型:   int
+	* @author 作者: Chenji Qiute 
+	* @date 时间: 2018年4月25日 下午4:44:37  
+	*/
+	int updateUserById(UpdateUserVO vo);
+
+	/** 
+	* @Description 方法描述: 根据用户id查询用户信息
+	* @return  返回值类型:   CustomerAccount
+	* @author 作者: Chenji Qiute 
+	* @date 时间: 2018年4月25日 下午4:58:23  
+	*/
+	FindUserByIdVO selectByPrimaryKey(String id);
+
+	/** 
+	* @Description 方法描述: 根据id删除用户
+	* @return  返回值类型:   int
+	* @author 作者: Chenji Qiute 
+	* @date 时间: 2018年4月25日 下午5:20:52  
+	*/
+	int deleteUserById(String uuid);
 
 }

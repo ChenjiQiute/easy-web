@@ -3,8 +3,7 @@
  */
 package com.tyyf.marriage.vo;
 
-import java.util.List;
-
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +15,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class UserListVO {
-	int pageNum;
-	int pageSize;
+public class InsertUserVO {
+	@ApiModelProperty(value = "手机号")
+    private String mobile;
+	@ApiModelProperty(value = "电子邮箱地址")
+    private String email;
+	@ApiModelProperty(value = "密码")
+    private String password;
+
 }

@@ -3,17 +3,24 @@
  */
 package com.tyyf.marriage.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tyyf.marriage.entity.CustomerAccount;
 import com.tyyf.marriage.mapper.CustomerAccountMapper;
 import com.tyyf.marriage.service.CustomerAccountService;
+import com.tyyf.marriage.tools.MD5Util;
+import com.tyyf.marriage.vo.FindUserByIdVO;
+import com.tyyf.marriage.vo.InsertUserVO;
+import com.tyyf.marriage.vo.UpdateUserVO;
 
 /**
  * @Description 会员相关账户操作
@@ -28,16 +35,53 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 	CustomerAccountMapper customerAccountMapper;
 
 	@Override
-	public int insertUser(CustomerAccount record) {
-		record.setUuid(UUID.randomUUID().toString());
-		return customerAccountMapper.insert(record);
+	public int insertUser(InsertUserVO vo) {
+		CustomerAccount entity = new CustomerAccount();
+		BeanUtils.copyProperties(vo, entity);
+		entity.setUuid(UUID.randomUUID().toString());
+		entity.setPassword(MD5Util.generate(vo.getPassword()));
+		entity.setAccountType(0);
+		entity.setDeleteType(0);
+		entity.setCreateTime(new Date());
+		return customerAccountMapper.insert(entity);
+	}
+
+	@Override
+	public PageInfo<CustomerAccount> findUserByPage(int pageNum, int pageSize) {
+		// 使用分页插件,核心代码就这一行
+		PageHelper.startPage(pageNum, pageSize);
+		List<CustomerAccount> userList = customerAccountMapper.findUserByPage();
+		// 分页封装类
+		PageInfo<CustomerAccount> p = new PageInfo<CustomerAccount>(userList);
+		return p;
 	}
 	
 	@Override
-	public List<CustomerAccount> getUserList(int pageNum, int pageSize){
-		//使用分页插件,核心代码就这一行
-        PageHelper.startPage(pageNum, pageSize);
-		return customerAccountMapper.getUserList();
+	public int updateUserById(UpdateUserVO vo) {
+		CustomerAccount entity = new CustomerAccount();
+		BeanUtils.copyProperties(vo, entity);
+		if (vo.getPassword() != null) {
+			entity.setPassword(MD5Util.generate(vo.getPassword()));
+		}
+		return customerAccountMapper.updateByPrimaryKeySelective(entity);
+	}
+	
+	@Override
+	public FindUserByIdVO selectByPrimaryKey(String id) {
+		CustomerAccount entity = customerAccountMapper.selectByPrimaryKey(id);
+		FindUserByIdVO vo = new FindUserByIdVO();
+		BeanUtils.copyProperties(entity, vo);
+		return vo;
+	}
+	
+	@Override
+	public int deleteUserById(String uuid) {
+		UpdateUserVO vo = new UpdateUserVO();
+		vo.setUuid(uuid);
+		vo.setDeleteType(1);
+		CustomerAccount entity = new CustomerAccount();
+		BeanUtils.copyProperties(vo, entity);
+		return customerAccountMapper.updateByPrimaryKeySelective(entity);
 	}
 
 }

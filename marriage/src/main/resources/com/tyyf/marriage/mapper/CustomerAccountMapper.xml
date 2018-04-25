@@ -197,9 +197,11 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <!-- 获取用户列表 -->
-  <select id="getUserList" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from customer_account
+  <select id="findUserByPage" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT 
+      uuid, mobile, email, wechat_account, alipay_account, account_type, login_time, 
+      recommend_persion, create_persion, create_time, update_persion, update_time
+    FROM customer_account
+    WHERE delete_type = 0
   </select>
 </mapper>

@@ -17,5 +17,5 @@ public interface CustomerAccountMapper {
 
     int updateByPrimaryKey(CustomerAccount record);
     
-    List<CustomerAccount> getUserList();
+    List<CustomerAccount> findUserByPage();
 }

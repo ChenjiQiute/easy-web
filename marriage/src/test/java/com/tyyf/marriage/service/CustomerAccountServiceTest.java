@@ -4,7 +4,6 @@
 package com.tyyf.marriage.service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -16,7 +15,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.tyyf.marriage.MarriageApplication;
+import com.github.pagehelper.PageInfo;
+import com.tyyf.marriage.Application.MarriageApplication;
 import com.tyyf.marriage.entity.CustomerAccount;
 import com.tyyf.marriage.mapper.CustomerAccountMapper;
 import com.tyyf.marriage.tools.MD5Util;
@@ -68,8 +68,8 @@ public class CustomerAccountServiceTest {
 
 	@Test
 	public void testPageList() {
-		List<CustomerAccount> result = customerAccountService.getUserList(1, 10);
-		assert (result.size() == 10);
+		PageInfo<CustomerAccount> result = customerAccountService.findUserByPage(1, 10);
+		assert (result.getSize() == 10);
 	}
 
 }
