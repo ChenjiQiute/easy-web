@@ -11,10 +11,11 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_persion" property="updatePersion" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_type" property="deleteType" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     uuid, amount, order_type, uuid_salesman, channel, create_persion, create_time, update_persion, 
-    update_time
+    update_time, delete_type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -29,12 +30,12 @@
   <insert id="insert" parameterType="com.tyyf.marriage.entity.OrderInformation" >
     insert into order_information (uuid, amount, order_type, 
       uuid_salesman, channel, create_persion, 
-      create_time, update_persion, update_time
-      )
+      create_time, update_persion, update_time, 
+      delete_type)
     values (#{uuid,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{orderType,jdbcType=INTEGER}, 
       #{uuidSalesman,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{createPersion,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deleteType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tyyf.marriage.entity.OrderInformation" >
     insert into order_information
@@ -66,6 +67,9 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="deleteType != null" >
+        delete_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -94,6 +98,9 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteType != null" >
+        #{deleteType,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -124,6 +131,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="deleteType != null" >
+        delete_type = #{deleteType,jdbcType=INTEGER},
+      </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
@@ -136,7 +146,14 @@
       create_persion = #{createPersion,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_persion = #{updatePersion,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_type = #{deleteType,jdbcType=INTEGER}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
+  <!-- 分页查询订单列表 -->
+  <select id="findOrderByPage" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_information
+  </select>
 </mapper>

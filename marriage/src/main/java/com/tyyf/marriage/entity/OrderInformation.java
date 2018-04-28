@@ -21,6 +21,8 @@ public class OrderInformation {
 
     private Date updateTime;
 
+    private Integer deleteType;
+
     public String getUuid() {
         return uuid;
     }
@@ -91,5 +93,13 @@ public class OrderInformation {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getDeleteType() {
+        return deleteType;
+    }
+
+    public void setDeleteType(Integer deleteType) {
+        this.deleteType = deleteType;
     }
 }
