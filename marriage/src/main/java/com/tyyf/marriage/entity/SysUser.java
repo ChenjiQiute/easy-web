@@ -25,6 +25,8 @@ public class SysUser {
 
     private Integer loginCount;
 
+    private Integer deleteType;
+
     public String getUserId() {
         return userId;
     }
@@ -111,5 +113,13 @@ public class SysUser {
 
     public void setLoginCount(Integer loginCount) {
         this.loginCount = loginCount;
+    }
+
+    public Integer getDeleteType() {
+        return deleteType;
+    }
+
+    public void setDeleteType(Integer deleteType) {
+        this.deleteType = deleteType;
     }
 }

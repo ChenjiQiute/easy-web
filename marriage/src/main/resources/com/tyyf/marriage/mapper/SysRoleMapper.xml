@@ -55,4 +55,10 @@
     set role_name = #{roleName,jdbcType=VARCHAR}
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="findAdminByPage" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+  </select>
 </mapper>

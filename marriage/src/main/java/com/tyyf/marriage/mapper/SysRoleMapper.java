@@ -1,5 +1,7 @@
 package com.tyyf.marriage.mapper;
 
+import java.util.List;
+
 import com.tyyf.marriage.entity.SysRole;
 
 public interface SysRoleMapper {
@@ -14,4 +16,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+    
+    List<SysRole> findAdminByPage();
 }

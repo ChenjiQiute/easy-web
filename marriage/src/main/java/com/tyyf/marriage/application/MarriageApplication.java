@@ -1,4 +1,4 @@
-package com.tyyf.marriage.Application;
+package com.tyyf.marriage.application;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
