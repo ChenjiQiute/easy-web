@@ -1,5 +1,7 @@
 package com.tyyf.marriage.mapper;
 
+import java.util.List;
+
 import com.tyyf.marriage.entity.SysUserRole;
 
 public interface SysUserRoleMapper {
@@ -14,4 +16,6 @@ public interface SysUserRoleMapper {
     int updateByPrimaryKeySelective(SysUserRole record);
 
     int updateByPrimaryKey(SysUserRole record);
+    
+    List<SysUserRole> findAllByUserId(String userId);
 }

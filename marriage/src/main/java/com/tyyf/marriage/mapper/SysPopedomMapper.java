@@ -1,5 +1,7 @@
 package com.tyyf.marriage.mapper;
 
+import java.util.List;
+
 import com.tyyf.marriage.entity.SysPopedom;
 
 public interface SysPopedomMapper {
@@ -14,4 +16,6 @@ public interface SysPopedomMapper {
     int updateByPrimaryKeySelective(SysPopedom record);
 
     int updateByPrimaryKey(SysPopedom record);
+    
+    List<SysPopedom> findPopedomByPage();
 }

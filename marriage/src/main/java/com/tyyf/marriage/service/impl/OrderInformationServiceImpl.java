@@ -6,6 +6,8 @@ package com.tyyf.marriage.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,6 +21,8 @@ import com.tyyf.marriage.service.OrderInformationService;
  * @date 创建时间: 2018年4月28日 下午3:24:01
  * @Email chenjiqiute@msfintech.com
  */
+@Service
+@Transactional
 public class OrderInformationServiceImpl implements OrderInformationService {
 	@Autowired
 	OrderInformationMapper orderInformationMapper;

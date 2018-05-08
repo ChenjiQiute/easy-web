@@ -79,4 +79,11 @@
       popedom = #{popedom,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="findRolePopedomByPage" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_popedom
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
 </mapper>

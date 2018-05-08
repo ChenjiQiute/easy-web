@@ -90,4 +90,10 @@
       grade = #{grade,jdbcType=INTEGER}
     where popedom_id = #{popedomId,jdbcType=VARCHAR}
   </update>
+  <!-- 分页查询 -->
+  <select id="findPopedomByPage" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_popedom
+  </select>
 </mapper>
