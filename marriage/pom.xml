@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 
 	<name>marriage</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Web project for Tianyi app</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -51,10 +51,15 @@
 
 		<!-- springboot分页插件 -->
 		<dependency>
-		    <groupId>com.github.pagehelper</groupId>
-		    <artifactId>pagehelper-spring-boot-starter</artifactId>
-		    <version>1.2.5</version>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.5</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -77,30 +82,30 @@
 
 		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.codec -->
 		<dependency>
-		    <groupId>org.apache.directory.studio</groupId>
-		    <artifactId>org.apache.commons.codec</artifactId>
-		    <version>1.8</version>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.codec</artifactId>
+			<version>1.8</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <scope>provided</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- 热部署模块 -->
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-devtools</artifactId>
-		    <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
