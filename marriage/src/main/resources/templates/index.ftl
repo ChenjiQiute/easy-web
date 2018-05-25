@@ -19,6 +19,28 @@
 <link rel="stylesheet" href="css/font-icon.css">
 <link rel="stylesheet" href="css/animate.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+  <script>
+	function login() {
+	console.log($('#cform').serialize())
+	    $.ajax({
+	        type: "POST",//方法类型
+	        dataType: "json",//预期服务器返回的数据类型
+	        url: "/marriage/user/insertUser" ,//url
+	        data: $('#cform').serialize(),
+	        success: function (result) {
+	            console.log(result);//打印服务端返回的数据(调试用)
+	            if(result == 1){
+	            	alert("注册成功");
+	            }
+	        },
+	        error : function() {
+	            alert("异常！");
+	        }
+	    });
+	}
+  </script>
 </head>
 
 <body>
@@ -392,11 +414,10 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
     <div class="row">
       <div class="col-md-8 col-md-offset-2 conForm">       
         <div id="message"></div>
-        <form method="post" action="" name="cform" id="cform">
-          <input name="name" id="name" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Your name..." >
-          <input name="email" id="email" type="email" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="Email Address..." >
-          <textarea name="comments" id="comments" cols="" rows="" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Message..."></textarea>
-          <input type="submit" id="submit" name="send" class="submitBnt" value="Send">
+        <form method="post" action="return false" name="cform" id="cform">
+          <input name="mobile" id="mobile" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="手机号" >
+          <input name="password" id="password" type="password" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="密码" >
+          <input type="button" id="button" name="send" class="submitBnt" value="登录" onclick="login()">
           <div id="simple-msg"></div>
         </form>
       </div>
@@ -436,5 +457,7 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 <script src="js/modernizr.js"></script> 
 <script src="js/main.js"></script> 
 <script type="text/javascript" src="js/jquery.contact.js"></script> 
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </body>
 </html>

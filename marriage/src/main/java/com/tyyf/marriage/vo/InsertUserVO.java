@@ -18,8 +18,6 @@ import lombok.Setter;
 public class InsertUserVO {
 	@ApiModelProperty(value = "手机号")
     private String mobile;
-	@ApiModelProperty(value = "电子邮箱地址")
-    private String email;
 	@ApiModelProperty(value = "密码")
     private String password;
 
