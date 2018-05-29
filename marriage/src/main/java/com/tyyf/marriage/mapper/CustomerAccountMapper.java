@@ -18,4 +18,6 @@ public interface CustomerAccountMapper {
     int updateByPrimaryKey(CustomerAccount record);
     
     List<CustomerAccount> findUserByPage();
+    
+    int checkMobileExist(String mobile);
 }

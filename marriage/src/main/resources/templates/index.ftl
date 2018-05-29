@@ -34,6 +34,9 @@
 	            if(result == 1){
 	            	alert("注册成功");
 	            }
+	            if(result == -1){
+	            	alert("手机号已经注册");
+	            }
 	        },
 	        error : function() {
 	            alert("异常！");
@@ -408,8 +411,8 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 <section id="contact" class="section">
   <div class="container">
       <div class="section-header">
-                <h2 class="wow fadeInDown animated">Contact Us</h2>
-                <p class="wow fadeInDown animated">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget risus vitae massa <br> semper aliquam quis mattis quam.</p>
+                <h2 class="wow fadeInDown animated">成为会员</h2>
+                <p class="wow fadeInDown animated">加入成为会员，让我们为您服务。<br> 幸福路上需要一些勇气与耐心。</p>
             </div>
     <div class="row">
       <div class="col-md-8 col-md-offset-2 conForm">       

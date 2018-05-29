@@ -36,14 +36,17 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 
 	@Override
 	public int insertUser(InsertUserVO vo) {
-		CustomerAccount entity = new CustomerAccount();
-		BeanUtils.copyProperties(vo, entity);
-		entity.setUuid(UUID.randomUUID().toString());
-		entity.setPassword(MD5Util.generate(vo.getPassword()));
-		entity.setAccountType(0);
-		entity.setDeleteType(0);
-		entity.setCreateTime(new Date());
-		return customerAccountMapper.insert(entity);
+		if (customerAccountMapper.checkMobileExist(vo.getMobile()) == 0) {
+			CustomerAccount entity = new CustomerAccount();
+			BeanUtils.copyProperties(vo, entity);
+			entity.setUuid(UUID.randomUUID().toString());
+			entity.setPassword(MD5Util.generate(vo.getPassword()));
+			entity.setAccountType(0);
+			entity.setDeleteType(0);
+			entity.setCreateTime(new Date());
+			return customerAccountMapper.insert(entity);
+		}
+		return -1;
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 		PageInfo<CustomerAccount> p = new PageInfo<CustomerAccount>(userList);
 		return p;
 	}
-	
+
 	@Override
 	public int updateUserById(UpdateUserVO vo) {
 		CustomerAccount entity = new CustomerAccount();
@@ -65,7 +68,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 		}
 		return customerAccountMapper.updateByPrimaryKeySelective(entity);
 	}
-	
+
 	@Override
 	public FindUserByIdVO selectByPrimaryKey(String id) {
 		CustomerAccount entity = customerAccountMapper.selectByPrimaryKey(id);
@@ -73,7 +76,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 		BeanUtils.copyProperties(entity, vo);
 		return vo;
 	}
-	
+
 	@Override
 	public int deleteUserById(String uuid) {
 		UpdateUserVO vo = new UpdateUserVO();

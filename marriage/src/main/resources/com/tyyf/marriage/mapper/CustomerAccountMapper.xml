@@ -204,4 +204,11 @@
     FROM customer_account
     WHERE delete_type = 0
   </select>
+  <!-- 查询手机号是否已被注册 -->
+  <select id="checkMobileExist" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    SELECT 
+      count(0)
+    FROM customer_account
+    WHERE mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
 </mapper>
