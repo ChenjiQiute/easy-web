@@ -4,6 +4,8 @@
 package com.tyyf.marriage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,8 +40,8 @@ public class CustomerAccountController {
 	
 	@RequestMapping(value = "insertUser", method = RequestMethod.POST)
 	@ApiOperation(value = "添加用户")
-	public int insertUser(InsertUserVO vo) {
-		return customerAccountService.insertUser(vo);
+	public String insertUser(@Validated InsertUserVO vo, BindingResult br) {
+		return customerAccountService.insertUser(vo,br);
 	}
 	
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)

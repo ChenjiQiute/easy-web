@@ -22,27 +22,67 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
   <script>
-	function login() {
-	console.log($('#cform').serialize())
+	function register() {
 	    $.ajax({
 	        type: "POST",//方法类型
 	        dataType: "json",//预期服务器返回的数据类型
 	        url: "/marriage/user/insertUser" ,//url
-	        data: $('#cform').serialize(),
+	        data: $('#regform').serialize(),
 	        success: function (result) {
 	            console.log(result);//打印服务端返回的数据(调试用)
 	            if(result == 1){
-	            	alert("注册成功");
+	            	
+	            	runEffect("注册成功")
+					$("#loginDiv").hide();
+					$("#registerDiv").hide();
 	            }
 	            if(result == -1){
-	            	alert("手机号已经注册");
+	            	runEffect("手机号已经注册");
 	            }
 	        },
-	        error : function() {
-	            alert("异常！");
+	        error : function(result) {
+	            runEffect(result.responseText);
 	        }
 	    });
 	}
+	<!-- 显示注册框 -->
+	function showRegister(){
+	  $("#loginDiv").hide();
+	  $("#registerDiv").show();
+	}
+	<!-- 显示登录框 -->
+	function showLogin(){
+	  $("#registerDiv").hide();
+	  $("#loginDiv").show();
+	}
+	
+	// 运行当前选中的特效
+    function runEffect(string) {
+    
+      // 从中获取特效类型
+      var selectedEffect = "blind";
+ 
+      // 大多数的特效类型默认不需要传递选项
+      var options = {};
+      // 一些特效带有必需的参数
+      if (selectedEffect === "scale"){
+        options = { percent: 100 };
+      } else if (selectedEffect === "size") {
+        options = {to:{width: 280, height: 185}};
+      }
+ 
+      $("#notice").text(string);
+      // 运行特效
+      $("#effect").show(selectedEffect,options,500,callback);
+    };
+ 
+    // 回调函数
+    function callback() {
+      setTimeout(function() {
+        $("#effect:visible").removeAttr("style").fadeOut();
+      }, 1000 );
+      $("#notice").text();
+    };
   </script>
 </head>
 
@@ -415,14 +455,26 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
                 <p class="wow fadeInDown animated">加入成为会员，让我们为您服务。<br> 幸福路上需要一些勇气与耐心。</p>
             </div>
     <div class="row">
-      <div class="col-md-8 col-md-offset-2 conForm">       
+      <div id="loginDiv" class="col-md-8 col-md-offset-2 conForm">       
         <div id="message"></div>
-        <form method="post" action="return false" name="cform" id="cform">
-          <input name="mobile" id="mobile" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="手机号" >
-          <input name="password" id="password" type="password" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="密码" >
-          <input type="button" id="button" name="send" class="submitBnt" value="登录" onclick="login()">
+        <form method="post" action="return false" name="loginform" id="loginform">
+          <input name="mobile" id="logmobile" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="手机号" >
+          <input name="password" id="logpassword" type="password" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="密码" >
+          <input type="button" id="sendlogin" name="send" class="submitBnt" value="登录" onclick="login()">
+          <a href="javascript:void(0);" onclick="showRegister()">注册</a>
           <div id="simple-msg"></div>
         </form>
+      </div>
+      <div id="registerDiv" class="col-md-8 col-md-offset-2 conForm" style="display: none;">
+      	  <div id="cformmessage"></div>
+	      <form method="post" action="return false" name="regform" id="regform">
+	          <input name="mobile" id="regmobile" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="手机号" >
+	          <input name="password" id="regpassword" type="password" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="密码" >
+	          <a href="javascript:void(0);" onclick="showLogin()">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	          <input type="button" id="sendlogin" name="send" class="submitBnt" value="注册" onclick="register()">
+	          <div id="simple-msg"></div>
+	      </form>
+	      <div id="simple-msg-cform"></div>
       </div>
     </div>
   </div>
@@ -434,7 +486,7 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 <div class="container-fluid">
 <div id="map-row" class="row">
     <div class="col-xs-12">          
-          <div id="map-overlay" class="col-xs-5 col-xs-offset-6" style="">
+          <div id="map-overlay" class="col-xs-5 col-xs-offset-6" style="display: none;">
     		<h2 style="margin-top:0;color:#fff;">Contact us</h2>
     		<address style="color:#fff;">
     			<strong>Company name</strong><br>
@@ -451,6 +503,14 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 </div>
 </footer>
 <!-- Footer section --> 
+<div class="toggler">
+  <div id="effect" class="ui-widget-content ui-corner-all" style="display: none;">
+    <h3 class="ui-widget-header ui-corner-all">提示</h3>
+    <p id="notice">
+      
+    </p>
+  </div>
+</div>
 <!-- JS FILES --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 

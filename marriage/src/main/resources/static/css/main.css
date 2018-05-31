@@ -734,3 +734,10 @@ ul.list-default li {
 	font-size: 11px;
 	margin: 0 2px;
 }
+/*
+      Prompt box
+*/
+.toggler { 
+	width: 500px; 
+	height: 200px; 
+}

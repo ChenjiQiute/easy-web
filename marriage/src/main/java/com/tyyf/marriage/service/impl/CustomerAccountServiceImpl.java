@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -35,7 +36,10 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 	CustomerAccountMapper customerAccountMapper;
 
 	@Override
-	public int insertUser(InsertUserVO vo) {
+	public String insertUser(InsertUserVO vo, BindingResult br) {
+		if (br.hasErrors()) {
+			return br.getFieldError().getDefaultMessage();
+		}
 		if (customerAccountMapper.checkMobileExist(vo.getMobile()) == 0) {
 			CustomerAccount entity = new CustomerAccount();
 			BeanUtils.copyProperties(vo, entity);
@@ -44,9 +48,14 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 			entity.setAccountType(0);
 			entity.setDeleteType(0);
 			entity.setCreateTime(new Date());
-			return customerAccountMapper.insert(entity);
+			int i = customerAccountMapper.insert(entity);
+			if (i == 1) {
+				return "注册成功!";
+			}else {
+				return "注册失败!";
+			}
 		}
-		return -1;
+		return "手机号已被注册!";
 	}
 
 	@Override
