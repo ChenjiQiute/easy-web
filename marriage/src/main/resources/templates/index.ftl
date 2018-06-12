@@ -471,7 +471,7 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 	          <input name="mobile" id="regmobile" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="手机号" >
 	          <input name="password" id="regpassword" type="password" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="密码" >
 	          <a href="javascript:void(0);" onclick="showLogin()">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	          <input type="button" id="sendlogin" name="send" class="submitBnt" value="注册" onclick="register()">
+	          <input type="button" id="sendreg" name="send" class="submitBnt" value="注册" onclick="register()">
 	          <div id="simple-msg"></div>
 	      </form>
 	      <div id="simple-msg-cform"></div>
@@ -486,7 +486,7 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 <div class="container-fluid">
 <div id="map-row" class="row">
     <div class="col-xs-12">          
-          <div id="map-overlay" class="col-xs-5 col-xs-offset-6" style="display: none;">
+          <div id="map-overlay" class="" >
     		<h2 style="margin-top:0;color:#fff;">Contact us</h2>
     		<address style="color:#fff;">
     			<strong>Company name</strong><br>
@@ -512,7 +512,10 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
   </div>
 </div>
 <!-- JS FILES --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --> 
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="js/jquery.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.flexslider-min.js"></script> 
 <script src="js/jquery.fancybox.pack.js"></script> 
@@ -520,7 +523,5 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 <script src="js/modernizr.js"></script> 
 <script src="js/main.js"></script> 
 <script type="text/javascript" src="js/jquery.contact.js"></script> 
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </body>
 </html>

@@ -50,7 +50,7 @@ h5 {
 }
 #map-overlay {
     height:400px;
-    margin-top:-405px;
+    margin-top:0px;
     background-color:#616161;
     padding:40px;
     color: #fff;
