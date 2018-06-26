@@ -15,13 +15,17 @@ import org.springframework.validation.BindingResult;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tyyf.marriage.entity.AccountInfoDetail;
 import com.tyyf.marriage.entity.CustomerAccount;
+import com.tyyf.marriage.mapper.AccountInfoDetailMapper;
 import com.tyyf.marriage.mapper.CustomerAccountMapper;
 import com.tyyf.marriage.service.CustomerAccountService;
 import com.tyyf.marriage.tools.MD5Util;
 import com.tyyf.marriage.vo.FindUserByIdVO;
 import com.tyyf.marriage.vo.InsertUserVO;
 import com.tyyf.marriage.vo.UpdateUserVO;
+import com.tyyf.marriage.vo.UserVO;
+import com.tyyf.marriage.vo.LoginVO;
 
 /**
  * @Description 会员相关账户操作
@@ -34,6 +38,8 @@ import com.tyyf.marriage.vo.UpdateUserVO;
 public class CustomerAccountServiceImpl implements CustomerAccountService {
 	@Autowired
 	CustomerAccountMapper customerAccountMapper;
+	@Autowired
+	AccountInfoDetailMapper accountInfoDetailMapper;
 
 	@Override
 	public String insertUser(InsertUserVO vo, BindingResult br) {
@@ -51,11 +57,36 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 			int i = customerAccountMapper.insert(entity);
 			if (i == 1) {
 				return "注册成功!";
-			}else {
+			} else {
 				return "注册失败!";
 			}
 		}
 		return "手机号已被注册!";
+	}
+
+	@Override
+	public UserVO login(LoginVO vo, BindingResult br) {
+		UserVO userVO = new UserVO();
+		if (br.hasErrors()) {
+			userVO.setError(br.getFieldError().getDefaultMessage());
+			return userVO;
+		}
+		CustomerAccount record = new CustomerAccount();
+		record.setMobile(vo.getMobile());
+		CustomerAccount user = customerAccountMapper.selectByMobile(record);
+		if (user == null) {
+			userVO.setError("帐户名或密码错误！");
+			return userVO;
+		}
+		if (MD5Util.verify(vo.getPassword(), user.getPassword())) {
+			AccountInfoDetail accountInfo = accountInfoDetailMapper.selectByPrimaryKey(user.getUuid());
+			userVO.setMobile(user.getMobile());
+			if (accountInfo != null && accountInfo.getNickName() != null)
+				userVO.getNickName();
+			return userVO;
+		}
+		userVO.setError("帐户名或密码错误！");
+		return userVO;
 	}
 
 	@Override

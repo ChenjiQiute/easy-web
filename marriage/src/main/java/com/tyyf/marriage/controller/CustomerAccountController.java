@@ -16,7 +16,9 @@ import com.tyyf.marriage.entity.CustomerAccount;
 import com.tyyf.marriage.service.CustomerAccountService;
 import com.tyyf.marriage.vo.FindUserByIdVO;
 import com.tyyf.marriage.vo.InsertUserVO;
+import com.tyyf.marriage.vo.LoginVO;
 import com.tyyf.marriage.vo.UpdateUserVO;
+import com.tyyf.marriage.vo.UserVO;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -36,6 +38,12 @@ public class CustomerAccountController {
 	@ApiOperation(value = "获取用户列表")
 	public PageInfo<CustomerAccount> findUserByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
 		return customerAccountService.findUserByPage(pageNum, pageSize);
+	}
+	
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@ApiOperation(value = "用户登录")
+	public UserVO login(@Validated LoginVO vo, BindingResult br) {
+		return customerAccountService.login(vo, br);
 	}
 	
 	@RequestMapping(value = "insertUser", method = RequestMethod.POST)

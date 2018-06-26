@@ -21,69 +21,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
-  <script>
-	function register() {
-	    $.ajax({
-	        type: "POST",//方法类型
-	        dataType: "json",//预期服务器返回的数据类型
-	        url: "/marriage/user/insertUser" ,//url
-	        data: $('#regform').serialize(),
-	        success: function (result) {
-	            console.log(result);//打印服务端返回的数据(调试用)
-	            if(result == 1){
-	            	
-	            	runEffect("注册成功")
-					$("#loginDiv").hide();
-					$("#registerDiv").hide();
-	            }
-	            if(result == -1){
-	            	runEffect("手机号已经注册");
-	            }
-	        },
-	        error : function(result) {
-	            runEffect(result.responseText);
-	        }
-	    });
-	}
-	<!-- 显示注册框 -->
-	function showRegister(){
-	  $("#loginDiv").hide();
-	  $("#registerDiv").show();
-	}
-	<!-- 显示登录框 -->
-	function showLogin(){
-	  $("#registerDiv").hide();
-	  $("#loginDiv").show();
-	}
-	
-	// 运行当前选中的特效
-    function runEffect(string) {
-    
-      // 从中获取特效类型
-      var selectedEffect = "blind";
- 
-      // 大多数的特效类型默认不需要传递选项
-      var options = {};
-      // 一些特效带有必需的参数
-      if (selectedEffect === "scale"){
-        options = { percent: 100 };
-      } else if (selectedEffect === "size") {
-        options = {to:{width: 280, height: 185}};
-      }
- 
-      $("#notice").text(string);
-      // 运行特效
-      $("#effect").show(selectedEffect,options,500,callback);
-    };
- 
-    // 回调函数
-    function callback() {
-      setTimeout(function() {
-        $("#effect:visible").removeAttr("style").fadeOut();
-      }, 1000 );
-      $("#notice").text();
-    };
-  </script>
 </head>
 
 <body>
@@ -513,8 +450,8 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 </div>
 <!-- JS FILES --> 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --> 
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!--<script src="//code.jquery.com/jquery-1.9.1.js"></script>-->
+<!--<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
 <script src="js/jquery.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/jquery.flexslider-min.js"></script> 
@@ -523,5 +460,90 @@ semper aliquam quis mattis consectetur adipiscing elit.." </h1>
 <script src="js/modernizr.js"></script> 
 <script src="js/main.js"></script> 
 <script type="text/javascript" src="js/jquery.contact.js"></script> 
+<script>
+  <!-- 登录 -->
+  function login() {
+	    $.ajax({
+	        type: "POST",//方法类型
+	        dataType: "json",//预期服务器返回的数据类型
+	        url: "/marriage/user/login" ,//url
+	        data: $('#loginform').serialize(),
+	        success: function (result) {
+	            if(result.error == null){
+	            	runEffect("登录成功")
+					$("#loginform").hide();
+					$("#regform").hide();
+	            }
+	            if(result.error != null){
+	            	runEffect(result.error);
+	            }
+	        },
+	        error : function(result) {
+	            runEffect(result.responseText);
+	        }
+	    });
+	}
+	<!-- 注册 -->
+	function register() {
+	    $.ajax({
+	        type: "POST",//方法类型
+	        dataType: "json",//预期服务器返回的数据类型
+	        url: "/marriage/user/insertUser" ,//url
+	        data: $('#regform').serialize(),
+	        success: function (result) {
+	            if(result == 1){
+	            	
+	            	runEffect("注册成功")
+					$("#loginDiv").hide();
+					$("#registerDiv").hide();
+	            }
+	            if(result == -1){
+	            	runEffect("手机号已经注册");
+	            }
+	        },
+	        error : function(result) {
+	            runEffect(result.responseText);
+	        }
+	    });
+	}
+	<!-- 显示注册框 -->
+	function showRegister(){
+	  $("#loginDiv").hide();
+	  $("#registerDiv").show();
+	}
+	<!-- 显示登录框 -->
+	function showLogin(){
+	  $("#registerDiv").hide();
+	  $("#loginDiv").show();
+	}
+	
+	// 运行当前选中的特效
+    function runEffect(string) {
+    
+      // 从中获取特效类型
+      var selectedEffect = "blind";
+ 
+      // 大多数的特效类型默认不需要传递选项
+      var options = {};
+      // 一些特效带有必需的参数
+      if (selectedEffect === "scale"){
+        options = { percent: 100 };
+      } else if (selectedEffect === "size") {
+        options = {to:{width: 280, height: 185}};
+      }
+ 
+      $("#notice").text(string);
+      // 运行特效
+      $("#effect").show(selectedEffect,options,500,callback);
+    };
+ 
+    // 回调函数
+    function callback() {
+      setTimeout(function() {
+        $("#effect:visible").removeAttr("style").fadeOut();
+      }, 1000 );
+      $("#notice").text();
+    };
+  </script>
 </body>
 </html>

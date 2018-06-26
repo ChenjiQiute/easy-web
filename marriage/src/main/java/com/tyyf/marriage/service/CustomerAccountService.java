@@ -10,6 +10,8 @@ import com.tyyf.marriage.entity.CustomerAccount;
 import com.tyyf.marriage.vo.FindUserByIdVO;
 import com.tyyf.marriage.vo.InsertUserVO;
 import com.tyyf.marriage.vo.UpdateUserVO;
+import com.tyyf.marriage.vo.UserVO;
+import com.tyyf.marriage.vo.LoginVO;
 
 /**
  * @Description TODO
@@ -58,5 +60,13 @@ public interface CustomerAccountService {
 	 * @date 时间: 2018年4月25日 下午5:20:52
 	 */
 	int deleteUserById(String uuid);
+
+	/** 
+	* @Description 方法描述: 注册 
+	* @return  返回值类型:   UserVO
+	* @author 作者: Chenji Qiute 
+	* @date 时间: 2018年6月26日 上午9:24:53  
+	*/
+	UserVO login(LoginVO vo, BindingResult br);
 
 }

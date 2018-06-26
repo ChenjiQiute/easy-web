@@ -20,4 +20,6 @@ public interface CustomerAccountMapper {
     List<CustomerAccount> findUserByPage();
     
     int checkMobileExist(String mobile);
+    
+    CustomerAccount selectByMobile(CustomerAccount record);
 }

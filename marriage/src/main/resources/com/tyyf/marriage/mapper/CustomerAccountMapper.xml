@@ -210,5 +210,14 @@
       count(0)
     FROM customer_account
     WHERE mobile = #{mobile,jdbcType=VARCHAR}
+    AND delete_type = 0
+  </select>
+  <!-- 查询手机号是否已被注册 -->
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="com.tyyf.marriage.entity.CustomerAccount" >
+    SELECT 
+      <include refid="Base_Column_List" />
+    FROM customer_account
+    WHERE mobile = #{mobile,jdbcType=VARCHAR}
+    AND delete_type = 0
   </select>
 </mapper>
